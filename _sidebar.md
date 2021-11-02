@@ -15,5 +15,9 @@
   * [算法](./docs/3.3算法.md)
   * [操作系统](./docs/3.4操作系统.md)
 
+* SpringCloud Alibaba
+
+  * [5.1 OAuth2认证系统](./docs/cloud-alibaba/5.1 OAuth2认证系统.md)
+
   
 
