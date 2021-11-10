@@ -1,0 +1,214 @@
+## ![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1636555698833-32252f9d-3f2e-4521-854b-37e733c5530b.png#clientId=u9b2c9e11-f6c1-4&from=paste&height=275&id=u6cd6ce66&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1098&originWidth=1624&originalType=binary&ratio=1&size=553823&status=done&style=none&taskId=u5da4c670-eb01-4ec0-bf0e-433c82f71cc&width=406)
+## 5.2.1 多租户概念 
+### 概念
+
+- 多租户技术（英语：multi-tenancy technology）或称多重租赁技术，是一种软件架构技术，它是在探讨与 实现如何于多用户的环境下共用相同的系统或程序组件，并且仍可确保各用户间数据的隔离性。 
+- 多租户简单来说是指一个单独的实例可以为多个组织服务。多租户技术为共用的数据中心内如何以单一系统 架构与服务提供多数客户端相同甚至可定制化的服务，并且仍然可以保障客户的数据隔离。一个支持多租户技术的系统需要在设计上对它的数据和配置进行虚拟分区，从而使系统的每个租户或称组织都能够使用一个单独的系统实例，并且每个租户都可以根据自己的需求对租用的系统实例进行个性化配置。 
+- 多租户技术可以实现多个租户之间共享系统实例，同时又可以实现租户的系统实例的个性化定制。通过使用多租户技术可以保证系统共性的部分被共享，个性的部分被单独隔离。通过在多个租户之间的资源复用，运营管理维护资源，有效节省开发应用的成本。而且，在租户之间共享应用程序的单个实例，可以实现当应用程序升级时，所有租户可以同时升级。同时，因为多个租户共享一份系统的核心代码，因此当系统升级时，只需要升级相同的核心代码即可。 
+### 实现方式 
+
+- 多租户技术的实现重点，在于不同租户间应用程序环境的隔离（application context isolation）以及数据的隔离（data isolation)，以维持不同租户间应用程序不会相互干扰，同时数据的保密性也够强。 
+- 应用程序部份：通过进程或是支持多应用程序同时运行的装载环境（例如Web Server，像是Apache或IIS等）来做进程间的隔离，或是在同一个伺服程序（server）进程内以运行绪的方式隔离。 
+- 数据部份：通过不同的机制将不同租户的数据隔离，Force是采用中介数据（metadata）的技术来切割，微软 MSDN 的技术文件则是展示了使用结构描述的方式隔离。 
+- 实现方式:多租户就是说多个租户共用一个实例，租户的数据既有隔离又有共享,从而解决数据存储的问题。从架构层面来分析，SaaS区别于传统技术的重要差别就是Multi-Tenant模式。SaaS多租户在数据存储上存在三种主要的方案，分别是 :
+#### 1.独立数据库 
+这是第一种方案，即一个租户一个数据库，这种方案的用户数据隔离级别最高，安全性最好，但成本也高。 
+**优点： **
+为不同的租户提供独立的数据库，有助于简化数据模型的扩展设计，满足不同租户的独特需求； 
+如果出现故障，恢复数据比较简单。 
+**缺点： **
+增大了数据库的安装数量，随之带来维护成本和购置成本的增加。 
+这种方案与传统的一个客户、一套数据、一套部署类似，差别只在于软件统一部署在运营商那里。如果面对的是银行、医院等需要非常高数据隔离级别的租户，可以选择这种模式，提高租用的定价。如果定价较低，产品走低价路线，这种方案一般对运营商来说是无法承受的。 
+#### 2.共享数据库，隔离数据架构 
+这是第二种方案，即多个或所有租户共享Database，但一个Tenant一个Schema。 
+**优点： **
+为安全性要求较高的租户提供了一定程度的逻辑数据隔离，并不是完全隔离；每个数据库可以支持更多的租户数量。
+**缺点：**
+如果出现故障，数据恢复比较困难，因为恢复数据库将牵扯到其他租户的数据； 
+如果需要跨租户统计数据，存在一定困难。 
+#### 3.共享数据库，共享数据架构 
+这是第三种方案，即租户共享同一个Database、同一个Schema，但在表中通过TenantID区分租户的数据。这是共享程度最高、隔离级别最低的模式。 
+**优点： **
+三种方案比较，第三种方案的维护和购置成本最低，允许每个数据库支持的租户数量最多。 
+**缺点： **
+隔离级别最低，安全性最低，需要在设计开发时加大对安全的开发量； 
+数据备份和恢复最困难，需要逐表逐条备份和还原。 
+如果希望以最少的服务器为最多的租户提供服务，并且租户接受以牺牲隔离级别换取降低成本，这种方案最适合。 
+## 5.2.2 多租户配置
+### 5.2.2.1 基础配置
+#### 使用多租户注意点 
+1. 需要数据隔离的业务表，新建一个字段，tenant_id 
+2. 实体类继承TenantEntity或者加入tenantId属性，框架底层会自动对tenant_id进行处理 
+3. 当系统启动的时候，会自动识别包含tenantId的类，并将其加载入多租户插件自动启用 
+4. 若需要自行定制，有了tenantId但不需要多租户插件的自动介入，可以通过配置进行排除，这样就可以自行定义复杂逻辑了，具体配置如下: 
+```yaml
+# 租户表维护 
+techpower: 
+#多租户配置 
+tenant: 
+#多租户对应字段 
+column: tenant_id 
+#排除多租户逻辑 
+exclude-tables: 
+- tb_news 
+- tb_goods 
+```
+
+
+5. 另外有一些特殊情况，既需要启用多租户插件，在新增的时候有又要指定的tenantId覆盖租户插件默认加上的值，则可以通过如下配置进行开启:
+```yaml
+# 租户表维护 
+techpower: 
+#多租户配置 
+tenant: 
+#多租户增强 
+enhance: true 
+```
+ 
+### 5.2.2.2 域名绑定 
+#### 多租户域名绑定 
+1. 系统提供了多租户域名绑定功能，可以配置每个租户所对应的域名以及背景 
+2. 配置完毕，部署系统并绑定域名，后续访问域名就可以根据域名读取对应的租户信息 
+3. 读取到信息后，系统会自动根据取到的背景图替换默认背景图，同时隐藏租户输入框，这样一来，对于各租户来说，就可以无感知地登陆，也不需要再记忆租户编号了，非常方便。
+
+
+### 5.2.2.3 授权保护 
+#### 多租户授权保护机制 
+1. 开启techpower.tenant.license=true，具体配置如下 
+```yaml
+#techpower配置 
+techpower: 
+#多租户配置 
+tenant: 
+#多租户授权保护 
+license: true 
+```
+2. 在后端进行租户授权配置，查看数据库，可以看到数据库对应的字段已经填入了加密后的信息 
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1636552115433-09a83ac6-506c-4411-ac63-be06a71459d5.png#clientId=u0eb450bc-e7f1-4&from=paste&height=409&id=u45be4a2a&margin=%5Bobject%20Object%5D&name=image.png&originHeight=818&originWidth=1356&originalType=binary&ratio=1&size=180059&status=done&style=none&taskId=u6eb91118-b084-4d4e-8521-acebf7ed07b&width=678)
+3. 这样一来，如果需要私有部署到客户的服务器，有试用期的话，也不用担心客户打开数据库修改时间字段直接越权延长了使用时间或账号限制
+
+
+## 5.2.3 多租户顶部菜单 
+
+
+顶部菜单主要作用为将很多模块进行分组，并显示在系统顶部，点击后可以快速切换菜单如此一来，可以使得项目更加简介，效率更高。
+
+
+## 5.2.4 多租户数据隔离
+​
+
+### 5.2.4.1 方案概要 
+#### 数据隔离方案简介
+
+- 采用了比较轻量级的解决方案 
+- 基于Mybatis-Plus的 dynamic-datasource-spring-boot-starter 插件以及多数据源插件进行深度二次开发，100%契合Mybatis-Plus的特性 
+- 实现了字段隔离+数据库隔离相互共存的方案，不依赖外部中间件，直接启动工程便可生效 
+- 支持数据库与租户一对一、一对多、多对多等灵活的方式，可以满足中国式产品需求 可通过注解或全局切面来动态自定义控制租户的数据库隔离 
+### 
+5.2.4.2 字段隔离配置 
+#### 字段隔离方案 
+
+- 字段隔离为默认的方案 
+- 若要生效租户插件，则需要在租户业务的表内增加tenant_id字段，并且对应表的实体类继承TenantEntity或者增加tenantId字段 
+- 有些多租户系统会采用纯数据库隔离的方案，这样也就不需要使用tenant_id字段，但这个成本过于昂贵，可选性相对较低 
+- 考虑到具体硬件资源、运维难度、后续系统升级难度、同时支持多种隔离方案等情况，所以会以最基础的字段隔离作为默认方案 
+#### 字段隔离配置 
+
+1. 需要数据隔离的业务表，新建一个字段，tenant_id 
+1. 实体类继承TenantEntity或者加入tenantId属性，框架底层会自动对tenant_id进行处理 
+1. 当系统启动的时候，会自动识别包含tenantId的类，并将其加载入多租户插件自动启用 
+1. 若需要自行定制，有了tenantId但不需要多租户插件的自动介入，可以通过配置进行排除，这样就可以自行 定义复杂逻辑了，具体配置如下
+```yaml
+# 租户表维护 
+techpower: 
+#多租户配置 
+tenant: 
+#多租户对应字段 
+column: tenant_id 
+#排除多租户逻辑 
+exclude-tables:
+- tb_news 
+- tb_goods
+
+```
+### 
+5.2.4.3 数据库隔离配置 
+#### 数据库隔离方案 
+
+- 系统默认为字段隔离，若后续业务扩张起来，可以考虑开启数据库隔离插件 
+- 开启数据库隔离后原先的代码几乎不需要变动，可以通过注解或者全局切面来控制数据库隔离的业务表 
+- 为了成本考虑，适应中国式多租户需求。可以在前期资源较紧张的时候配置一个数 据库所有租户，或者5个数据库平分所有租户 
+- 当然等后期业务扩张完毕，系统资金到位，可以配置为一个数据库一个租户，又因为默认采用字段隔离为辅助，这对后续数据库迁移、数据汇总统计带来极大的便利 
+
+​
+
+#### 数据库隔离注解配置 
+1. 开启数据库隔离配置 
+```yaml
+# 租户表维护 
+techpower: 
+#多租户配置 
+tenant: 
+#动态数据源功能 
+dynamic-datasource: true 
+
+```
+2. 启动服务，若控制台看到如下日志则说明数据库隔离配置启动成功 
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1636554478004-2ed6c581-79ed-4f95-89a3-11118f18fb0e.png#clientId=u0eb450bc-e7f1-4&from=paste&height=249&id=uf86438bb&margin=%5Bobject%20Object%5D&name=image.png&originHeight=498&originWidth=2688&originalType=binary&ratio=1&size=918565&status=done&style=none&taskId=u5a57d99b-41b5-489f-be5f-1704c0e3a62&width=1344)
+3. 前往 研发工具->数据源管理 进行租户数据源的配置
+4. 前往 系统管理->租户管理 配置刚刚新建的tenant_000000数据源 
+5. 修改两个数据库的sys_notice表，令两个库表数据不同 
+6. 在 NoticeController 头部增加注解 [@TenantDS ](/TenantDS ) ，这样便可以指定该控制器下所有方法都走对应租 户绑定的数据库（底层控制若查找不到对应的数据库则会使用master数据库） 
+7. 重启工程，可以看到增加初始化了租户ID为000000的数据源 
+8. 访问列表，发现列表返回的是刚刚配置的租户ID为000000库的数据
+9. 取消注解 [@TenantDS ](/TenantDS ) ，再次启动服务，访问列表会发现数据切换回了master源 
+#### 
+数据库隔离全局配置
+ 1. 开启数据库全局隔离配置 
+```yaml
+# 租户表维护 
+blade: 
+#多租户配置 
+tenant: #动态数据源功能 
+dynamic-datasource: true 
+#动态数据源全局扫描 dynamic-global: true
+```
+
+
+2. 接着上一节保持 [@TenantDS ](/TenantDS ) 注解为注释状态 
+3. 重启服务，访问列表，可以看到又切换回了刚刚配置的租户ID为000000库的数据
+4. 这样一来，全局的操作都会进行租户数据源的切换了，非常方便。但是有些情况，一些业务表必须要用到 master数据源，如果全局都切换必然是不符合中国式需求的 
+5. 对于这种情况，提供了一个排除的注解 [@NonDS ](/NonDS ) ，加上之后就不会受全局插件的影响了 
+6. 重启服务并访问列表，可以看到又回到了master数据源 
+
+### 5.2.4.4 注意点 
+#### 原先的动态数据源配置 
+
+- 启用多租户数据库隔离，会默认关闭mybatis-plus多数据源插件的启动，从而使用自定义的数据源识别 
+- 若不需要租户数据库隔离只需要字段隔离，而又需要用到多数据源的情况，需要前往LauncherService单独配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1636555157768-d7042c1b-6288-4658-9f53-e4f3be242ce5.png#clientId=u0eb450bc-e7f1-4&from=paste&height=477&id=u62797109&margin=%5Bobject%20Object%5D&name=image.png&originHeight=954&originWidth=2558&originalType=binary&ratio=1&size=680375&status=done&style=none&taskId=ua2bb4345-527d-4223-9c29-6e967dff44d&width=1279)
+#### 数据源切换失败 
+
+- 详情请看说明：[https://github.com/baomidou/dynamic-datasource-spring-boot-starter/wiki/FAQ](https://github.com/baomidou/dynamic-datasource-spring-boot-starter/wiki/FAQ) 
+#### Seata集成 
+
+- 详情请看说明：[https://github.com/baomidou/dynamic-datasource-spring-boot-](https://github.com/baomidou/dynamic-datasource-spring-boot-)starter/wiki/Integration-With-Seata 
+#### 异步任务切换数据源 
+
+- 异步任务下无法取到request，那对应的tenantId也就无法获取，如果在异步任务使用 [@TenantDS ](/TenantDS ) 注解便会失效 
+- 对于这种情况我们也有相应的解决方案，具体使用方法如下：
+```java
+@TenantParamDS  
+public void start(String tenantId) { 
+    dosomething();
+}
+
+
+@DS("#tenantId") 
+public void start(String tenantId) { 
+	dosomething(); 
+} 
+```
+
+- 主要原理是使用了动态参数解析的特性，详情请看说明：[https://github.com/baomidou/dynamic-](https://github.com/baomidou/dynamic-) datasource-spring-boot-starter/wiki/Dynamic-Analysis-DataSource 
