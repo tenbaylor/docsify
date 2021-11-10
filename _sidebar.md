@@ -15,8 +15,7 @@
 
 * SpringCloud Alibaba
 
-  * [5.1 OAuth2认证系统](./docs/cloud-alibaba/5-1-OAuth2认证系统.md)
-  * [5.2 OAuth2认证系统](./docs/cloud-alibaba/5-2-SaaS多租户.md)
+  * [5.1 OAuth2认证系统](./docs/cloud-alibaba/5-1-oauth2.md)
+  * [5.2 SaaS多租户](./docs/cloud-alibaba/5-2-tenant.md)
 
-  
 
