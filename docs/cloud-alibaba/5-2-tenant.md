@@ -1,5 +1,7 @@
-## ![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1636555698833-32252f9d-3f2e-4521-854b-37e733c5530b.png#clientId=u9b2c9e11-f6c1-4&from=paste&height=275&id=u6cd6ce66&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1098&originWidth=1624&originalType=binary&ratio=1&size=553823&status=done&style=none&taskId=u5da4c670-eb01-4ec0-bf0e-433c82f71cc&width=406)
-## 5.2.1 多租户概念 
+## ![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1636555698833-32252f9d-3f2e-4521-854b-37e733c5530b.png)
+
+## 5.2.1 多租户概念
+
 ### 概念
 
 - 多租户技术（英语：multi-tenancy technology）或称多重租赁技术，是一种软件架构技术，它是在探讨与 实现如何于多用户的环境下共用相同的系统或程序组件，并且仍可确保各用户间数据的隔离性。 
@@ -35,6 +37,7 @@
 数据备份和恢复最困难，需要逐表逐条备份和还原。 
 如果希望以最少的服务器为最多的租户提供服务，并且租户接受以牺牲隔离级别换取降低成本，这种方案最适合。 
 ## 5.2.2 多租户配置
+
 ### 5.2.2.1 基础配置
 #### 使用多租户注意点 
 1. 需要数据隔离的业务表，新建一个字段，tenant_id 
@@ -64,7 +67,7 @@ tenant:
 #多租户增强 
 enhance: true 
 ```
- 
+
 ### 5.2.2.2 域名绑定 
 #### 多租户域名绑定 
 1. 系统提供了多租户域名绑定功能，可以配置每个租户所对应的域名以及背景 
@@ -84,18 +87,17 @@ tenant:
 license: true 
 ```
 2. 在后端进行租户授权配置，查看数据库，可以看到数据库对应的字段已经填入了加密后的信息 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1636552115433-09a83ac6-506c-4411-ac63-be06a71459d5.png#clientId=u0eb450bc-e7f1-4&from=paste&height=409&id=u45be4a2a&margin=%5Bobject%20Object%5D&name=image.png&originHeight=818&originWidth=1356&originalType=binary&ratio=1&size=180059&status=done&style=none&taskId=u6eb91118-b084-4d4e-8521-acebf7ed07b&width=678)
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1636552115433-09a83ac6-506c-4411-ac63-be06a71459d5.png)
 3. 这样一来，如果需要私有部署到客户的服务器，有试用期的话，也不用担心客户打开数据库修改时间字段直接越权延长了使用时间或账号限制
 
-
-## 5.2.3 多租户顶部菜单 
+## 5.2.3 多租户顶部菜单
 
 
 顶部菜单主要作用为将很多模块进行分组，并显示在系统顶部，点击后可以快速切换菜单如此一来，可以使得项目更加简介，效率更高。
 
 
 ## 5.2.4 多租户数据隔离
-​
+
 
 ### 5.2.4.1 方案概要 
 #### 数据隔离方案简介
@@ -140,7 +142,7 @@ exclude-tables:
 - 为了成本考虑，适应中国式多租户需求。可以在前期资源较紧张的时候配置一个数 据库所有租户，或者5个数据库平分所有租户 
 - 当然等后期业务扩张完毕，系统资金到位，可以配置为一个数据库一个租户，又因为默认采用字段隔离为辅助，这对后续数据库迁移、数据汇总统计带来极大的便利 
 
-​
+
 
 #### 数据库隔离注解配置 
 1. 开启数据库隔离配置 
@@ -154,7 +156,7 @@ dynamic-datasource: true
 
 ```
 2. 启动服务，若控制台看到如下日志则说明数据库隔离配置启动成功 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1636554478004-2ed6c581-79ed-4f95-89a3-11118f18fb0e.png#clientId=u0eb450bc-e7f1-4&from=paste&height=249&id=uf86438bb&margin=%5Bobject%20Object%5D&name=image.png&originHeight=498&originWidth=2688&originalType=binary&ratio=1&size=918565&status=done&style=none&taskId=u5a57d99b-41b5-489f-be5f-1704c0e3a62&width=1344)
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1636554478004-2ed6c581-79ed-4f95-89a3-11118f18fb0e.png)
 3. 前往 研发工具->数据源管理 进行租户数据源的配置
 4. 前往 系统管理->租户管理 配置刚刚新建的tenant_000000数据源 
 5. 修改两个数据库的sys_notice表，令两个库表数据不同 
@@ -167,7 +169,7 @@ dynamic-datasource: true
  1. 开启数据库全局隔离配置 
 ```yaml
 # 租户表维护 
-blade: 
+techpower: 
 #多租户配置 
 tenant: #动态数据源功能 
 dynamic-datasource: true 
@@ -187,7 +189,7 @@ dynamic-datasource: true
 - 启用多租户数据库隔离，会默认关闭mybatis-plus多数据源插件的启动，从而使用自定义的数据源识别 
 - 若不需要租户数据库隔离只需要字段隔离，而又需要用到多数据源的情况，需要前往LauncherService单独配置
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1636555157768-d7042c1b-6288-4658-9f53-e4f3be242ce5.png#clientId=u0eb450bc-e7f1-4&from=paste&height=477&id=u62797109&margin=%5Bobject%20Object%5D&name=image.png&originHeight=954&originWidth=2558&originalType=binary&ratio=1&size=680375&status=done&style=none&taskId=ua2bb4345-527d-4223-9c29-6e967dff44d&width=1279)
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1636555157768-d7042c1b-6288-4658-9f53-e4f3be242ce5.png)
 #### 数据源切换失败 
 
 - 详情请看说明：[https://github.com/baomidou/dynamic-datasource-spring-boot-starter/wiki/FAQ](https://github.com/baomidou/dynamic-datasource-spring-boot-starter/wiki/FAQ) 
