@@ -12,9 +12,9 @@
   * [操作系统](./docs/3.4操作系统.md)
 
 * SpringCloud Alibaba
-  * [0. Cloud Alibaba 技术栈](./docs/cloud-alibaba/0-cloudalibaba.md)
+  * [0  Cloud Alibaba 技术栈](./docs/cloud-alibaba/0-cloudalibaba.md)
   * [5.1 OAuth2认证系统](./docs/cloud-alibaba/5-1-oauth2.md)
   * [5.2 SaaS多租户](./docs/cloud-alibaba/5-2-tenant.md)
 
 * Vue
-  * [0. Vue技术栈](./docs/vue/0-vue.md)
+  * [0  Vue技术栈](./docs/vue/0-vue.md)

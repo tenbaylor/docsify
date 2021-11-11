@@ -1,13 +1,11 @@
 ## 开发环境
 
-
 - 语言：Java 8（1.8.0_271）
 - IDE ：IDEA / Visual Studio Code
 - 依赖管理：Maven3.6
 - 数据库：MySQL 8.0.22
 - 缓存：Redis 5.0
 - 反向代理：Nginx1.20.1
-
 
 
 ## 服务端技术架构
@@ -36,8 +34,8 @@
 - 其他：FastJson，EasyPoi，XXL-JOB， Lombok等
 
 
+```latex
 
-```
 # 工程结构
 ├── bke-auth -- 统一鉴权中心
 ├── bke-common -- 常用工具包
@@ -72,7 +70,8 @@
 └──
 
 ```
-```
+
+```latex
 # 单服务工程目录
 bke-system
 ├── bke-system-main（项目名称）
@@ -107,4 +106,5 @@ bke-system
 │   │       │         ├── vo                     (输出） 
 │   │       └
 └── pom.xml  （POM文件）
+
 ```
