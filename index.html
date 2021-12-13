@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>docsify</title>
+  <title>SaaS脚手架</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport"
@@ -19,7 +19,7 @@
   <script src="//unpkg.com/docsify-edit-on-github/index.js"></script>
   <script>
     window.$docsify = {
-      name: 'docsify',
+      name: 'SaaS脚手架',
       repo: 'https://github.com/tenbaylor/docsify',
       maxLevel: 5,//最大支持渲染的标题层级
       subMaxLevel: 3,
@@ -39,6 +39,14 @@
       plugins: [
         EditOnGithubPlugin.create('https://github.com/tenbaylor/docsify/master/')
       ],
+      beian: {
+        ICP: "皖ICP备2021010630号-1",
+        NISMSP: {
+            number: "",
+            url: "https://beian.miit.gov.cn/",
+            id: ""
+        },
+      },
     }
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
@@ -52,6 +60,8 @@
   <script src="//unpkg.com/docsify/lib/plugins/zoom-image.js"></script>
   <!-- 字数统计 -->
   <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
+  <!-- 备案 -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-beian@latest/dist/beian.min.js"></script>
 </body>
 
 </html>
