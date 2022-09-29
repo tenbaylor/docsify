@@ -2,8 +2,10 @@
 
 
 - 语言：Node.js（14.15.4）
+
 - IDE ：Visual Studio Code
-- ​
+
+  
 
 ## 前端技术架构
 
@@ -52,5 +54,4 @@ fte_manage_main
 ├── yarn.lock （锁版本包 ）
 └── vue.config.js （项目自定义配置文件 ）
 ```
-
 

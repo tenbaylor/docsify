@@ -1,7 +1,7 @@
 # docsify
 
 #### Description
-快速开发、SaaS脚手架；java技术栈；
+Java
 
 #### Software Architecture
 Software architecture description

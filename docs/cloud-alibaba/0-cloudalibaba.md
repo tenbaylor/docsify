@@ -1,4 +1,7 @@
+<a name="agFJY"></a>
+
 ## 开发环境
+
 
 - 语言：Java 8（1.8.0_271）
 - IDE ：IDEA / Visual Studio Code
@@ -8,9 +11,12 @@
 - 反向代理：Nginx1.20.1
 
 
+
 ## 服务端技术架构
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1628826194223-89b2575d-ead0-4e6d-8e5f-87d1ca99cc51.png)
+
+
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1628826194223-89b2575d-ead0-4e6d-8e5f-87d1ca99cc51-20220622152850226.png)
 
 - 基础分布式框架：
    - Spring Cloud Alibaba 2.2.5.RELEASE（框架子组件版本）
@@ -33,9 +39,8 @@
 - 日志打印：Log4j/Logback
 - 其他：FastJson，EasyPoi，XXL-JOB， Lombok等
 
-
+<br />
 ```latex
-
 # 工程结构
 ├── bke-auth -- 统一鉴权中心
 ├── bke-common -- 常用工具包
@@ -70,6 +75,7 @@
 └──
 
 ```
+
 
 ```latex
 # 单服务工程目录
@@ -106,5 +112,4 @@ bke-system
 │   │       │         ├── vo                     (输出） 
 │   │       └
 └── pom.xml  （POM文件）
-
 ```

@@ -3,7 +3,7 @@
 #### 概念
 OAuth 2 是一个工业级别的开发授权协议，可以使互联网用户授权第三方网站或应用访问他们在特定网站上的信 息（如个人资料、照片等），而不必向第三方网站或应用提供密码。在此之前我们使用用户名和密码的方式登录 到应用，聪明的互联网前辈们发明了 OAuth 授权协议提出了一个 “授权服务器”，经过用户授权后授权服务器 向第三方应用发放一个访问令牌，这样就可以在不向第三方应用提供账号和密码的情况下，通过令牌在特定时间内访问用户存放在特定资源服务器上的资源 
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635469849654-b5eaa3cd-1046-4d40-a43a-2c83959a747f.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635469849654-b5eaa3cd-1046-4d40-a43a-2c83959a747f.png)
 
 #### 学习资源  
 概念入门：[彻底理解 OAuth2 协议 ](https://www.bilibili.com/video/BV1zt41127hX?from=search&seid=15223742023959709802)
@@ -24,7 +24,7 @@ Tenant-Id : 000000 (替换为对应的租户id)
 Authorization ： Basic c3dvcmQ6c3dvcmRfc2VjcmV0 （"c3dvcmQ6c3dvcmRfc2VjcmV0"为 clientId:clientSecret串转换为的base64编码,需要和 tp_client 表的对应字段相匹配） 
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635845977226-864e6b50-1c7a-4cf8-9c0d-ba49013b16ae.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635845977226-864e6b50-1c7a-4cf8-9c0d-ba49013b16ae.png)
 
 **表单： **
 
@@ -40,13 +40,13 @@ password ： 21232f297a57a5a743894a0e4a801fc3
 - 其中的 sword 和 sword_secret 分别是 tp_client 表 client_id 和 client_secret 字段值，请一一对应。 
 - 框架对密码进行了二次加密，由前端调用传参需要现将原密码进行md5加密后再进行传递，原密码是 admin ，所以md5加密后是21232f297a57a5a743894a0e4a801fc3 ，具体如下 :
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635846040146-2eb2ce85-4d74-4cf6-be11-2fb2eb90fc96.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635846040146-2eb2ce85-4d74-4cf6-be11-2fb2eb90fc96.png)
 
 **调用认证接口返回结果 :**
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635846466030-6c3e1025-7597-4590-ad50-f7b1582187e6.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635846466030-6c3e1025-7597-4590-ad50-f7b1582187e6.png)
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635846535468-c9d404f4-1bef-4580-90a5-bb7e5a55798a.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635846535468-c9d404f4-1bef-4580-90a5-bb7e5a55798a.png)
 
 
 #### 二、刷新token
@@ -84,11 +84,11 @@ http://localhost:8100/oauth/authorize?tenant_id=000000&client_id=sword&redirect_
 
 2. 输入用户名为 admin ，密码为md5(admin)也就是上文提到的 21232f297a57a5a743894a0e4a801fc3 
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635847133028-e0bfd507-1384-4b9b-a912-a5cad1299b14.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635847133028-e0bfd507-1384-4b9b-a912-a5cad1299b14.png)
 
 3. 点击Authorize按钮，通过授权 
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635847599782-6d1d0338-6bec-49a9-b50f-722eda5c864f.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635847599782-6d1d0338-6bec-49a9-b50f-722eda5c864f.png)
 
 4. 系统自动跳转至http://localhost:8888并加上了code参数 
 4. 获取跳转后的code值(http://localhost:8888/?code=VhYNLR)之后，调用 http://localhost/bke-auth/oauth/token 传入对应的参数
@@ -130,11 +130,11 @@ Authorization ：bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXN0IjoidGVzdCI
 
 - 打开接口文档系统http://localhost:18000/doc.html，设置客户端认证的请求头。（"c3dvcmQ6c3dvcmRfc2VjcmV0"为clientId:clientSecret串转换为的base64编码 
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635845977226-864e6b50-1c7a-4cf8-9c0d-ba49013b16ae.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635845977226-864e6b50-1c7a-4cf8-9c0d-ba49013b16ae-20220622152409684.png)
 
 - 点击左上角的 Authorize ，配置 Authorization 请求头 
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635849710846-6526af52-be12-46ee-bb19-5dab7d3cc157.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635849710846-6526af52-be12-46ee-bb19-5dab7d3cc157.png)
 
 #### 配置token 
 
@@ -143,7 +143,7 @@ Authorization ：bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXN0IjoidGVzdCI
 - 请求头对应的值为 tokenType + ' ' + accessToken 
 - 配置租户编号，这里我们设置为 000000 
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635849997759-79a77c77-6387-4411-813a-5e87656d72f7.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635849997759-79a77c77-6387-4411-813a-5e87656d72f7.png)
 
 #### 配置生效 
 保存完毕后浏览器刷新，再打开对应的接口，这时候会发现接口直接调用成功 
@@ -159,7 +159,7 @@ Authorization ：bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXN0IjoidGVzdCI
 
 设置客户端认证的请求头，设置请求头为 Authorization ，请求头对应的值为 
 Basic c3dvcmQ6c3dvcmRfc2VjcmV0 （"c3dvcmQ6c3dvcmRfc2VjcmV0"为clientId:clientSecret串转换为的base64编码 ）
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635845977226-864e6b50-1c7a-4cf8-9c0d-ba49013b16ae.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635845977226-864e6b50-1c7a-4cf8-9c0d-ba49013b16ae-20220622152420848.png)
 
 ### Techpower-Auth请求头获取 
 
@@ -184,7 +184,7 @@ skip-url:
 
 - 网关鉴权逻辑代码位置如下： 
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635849142364-6865fa91-506e-466c-8c33-2cc677b52483.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635849142364-6865fa91-506e-466c-8c33-2cc677b52483-20220622152430064.png)
 
 
 ## 5.1.6 新应用授权 
@@ -265,7 +265,7 @@ rewrite ^(.*)$ /index.html break;
 4）后缀需要与JustAuth内定义的Key相对应，一般填入Key小写。具体Key的枚举，请看： 
 https://github.com/justauth/JustAuth/blob/master/src/main/java/me/zhyd/oauth/config/AuthDefaultSource.java 
 5） 举个例子，若我们需要配置的是微博的第三方登录，那么回调地址就是 (http://127.0.0.1:1888/oauth/redirect/weibo ) 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635855623152-4d3c882d-c242-4022-8b3e-a5e88330b0b3.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635855623152-4d3c882d-c242-4022-8b3e-a5e88330b0b3.png)
 
 - 权限： 根据页面提示操作，默认勾选第一个就行 
 
@@ -279,8 +279,8 @@ https://github.com/justauth/JustAuth/blob/master/src/main/java/me/zhyd/oauth/con
 1. 配置文件在 bke-auth 的 application.yml 与 application-xx.yml 内  
 1. 配置上一节获取到的密钥，注意 redirect-url 需要与刚刚在应用配置的应用回调地址一致 
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635855881426-ca82eb9e-8c30-46f9-b500-325fa247ae69.png)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635855924249-b34a39ae-5ac6-4521-b679-a0658c0ef5df.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635855881426-ca82eb9e-8c30-46f9-b500-325fa247ae69-20220622152451266.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635855924249-b34a39ae-5ac6-4521-b679-a0658c0ef5df.png)
 
 3. 前端配置第三方授权地址，对应的是后端开放的API
 
@@ -289,16 +289,16 @@ https://github.com/justauth/JustAuth/blob/master/src/main/java/me/zhyd/oauth/con
 #### 第三方系统登录详细操作流程 
 1. 启动前后端，访问前端首页 
 2. 点击跳转，可以看到，地址栏的clientId与我们刚刚配置的一致 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635856229698-1f763bf0-ab73-4f1f-9e95-84d5754e6358.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635856229698-1f763bf0-ab73-4f1f-9e95-84d5754e6358.png)
 3. 输入账号密码点击登录，同样可以看到，地址栏的信息与我们配置的一致 
 4. 点击同意授权，便会自动跳转会我们的前端系统，然后进行登录 
 5. 登录成功后系统会在后台检测该用户是否已经注册在系统内拥有自己的账号，若没有，第一次登录成功会弹出一个小框提供快速注册。（注：目前很多网站，使用第三方登录后，都会提示再注册一个账号或者使用手机+验证码的方式快速注册，否则只可以使用基础功能。这是常用的一个套路，因为这么做了就可以获取到用户的信息，提升用户粘性，若是手机注册，后续还可以发送营销短信，从商家的角度考虑，这无形中是一个非常省钱收益又大的功能。从用户角度考虑，只要营销不是太过分，都会默认接受。）（如果采用租户+定制域名的方式部署，则系统会自动读取租户编号，快捷注册的时候不会再弹出。只有使用通用域名没有绑定租户的时候，才会弹出租户编号让用户自行选择注册再那个租户下，具体租户域名配置，请看文档5.2.2章节） 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635856605272-f9d78386-c3b1-4edb-bfb3-11fe0ab76456.png)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635856623070-3871aa1e-2c99-45fb-a365-349e88b6a96d.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635856605272-f9d78386-c3b1-4edb-bfb3-11fe0ab76456.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635856623070-3871aa1e-2c99-45fb-a365-349e88b6a96d.png)
 6. 我们输入基本信息和账号密码，并点击提交，最后就会跳转回系统首页 
 7. 这时大家会发现，注册成功后，再次点击gitee登录，会重新回到首页并无法登录。因为我们现在的定位是后台管理系统，安全要求更高一些，必须要有指定的角色才可以登录。若大家不需要这么严格，可以自行简单修改逻辑，给第三方注册的用户默认分配一个guset角色，这样就可以登录查看最基础的菜单了。 
 8. 下面我们登录租户管理员，给刚注册的用户分配角色、部门、岗位，然后再进行登录测试 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1141782/1635856672742-2388d355-deb3-4feb-b25a-a86015bc603d.png)
+![image.png](https://pub-static.stcsm.sh.gov.cn/help/1635856672742-2388d355-deb3-4feb-b25a-a86015bc603d-20220622152508525.png)
 9. 提交后再次访问gitee三方登录，可以看到我们登录成功，菜单权限也与分配的角色一致 
 10. 因为我们刚刚快速注册了账号，那么除了第三方登录外，后续也可以直接使用账号来登录了，非常方便 
 11. 授权成功，我们会收到一份官方发过来的邮件，提示哪些应用被授权了 
